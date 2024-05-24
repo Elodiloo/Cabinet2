@@ -1,0 +1,10 @@
+{
+    "autoload": {
+        "psr-4": {
+            "app\\": "src"
+        }
+    },
+    "require": {
+        "twig/twig": "^3.10"
+    }
+}
