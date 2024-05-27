@@ -22,31 +22,25 @@
             <div class="slider-container">
                 <div class="menu">
                     <label for="slide1" class="arrow arrow-prev">
-                        <width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
-                            clip-rule="evenodd">
-                            <i class="fa-solid fa-chevron-left"></i>
+                        <i class="fa-solid fa-chevron-left"></i>
                     </label>
                     <label for="slide2" class="arrow arrow-next">
-                        <width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
-                            clip-rule="evenodd">
-                            <i class="fa-solid fa-chevron-right"></i>
+                        <i class="fa-solid fa-chevron-right"></i>
                     </label>
                     <label for="slide3" class="arrow arrow-next">
-                        <width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
-                            clip-rule="evenodd">
-                            <i class="fa-solid fa-chevron-right"></i>
+                        <i class="fa-solid fa-chevron-right"></i>
                     </label>
 
                 </div>
 
                 <input class="slide-input" id="slide1" type="radio" name="slides" checked>
-                <img class="slide-img" src="img/image3.jpg" alt="cabinetexterieur">
+                <img class="slide-img" src="../public/img/image3.jpg" alt="cabinetexterieur">
 
                 <input class="slide-input" id="slide2" type="radio" name="slides">
-                <img class="slide-img" src="img/image2.jpg" alt="cabinetinterieur">
+                <img class="slide-img" src="../public/img/image2.jpg" alt="cabinetinterieur">
 
-                <input class="slide-input" id="slide2" type="radio" name="slides">
-                <img class="slide-img" src="img/image1.png" alt="cabinetinterieur2">
+                <input class="slide-input" id="slide3" type="radio" name="slides">
+                <img class="slide-img" src="../puclic/img/image1.png" alt="cabinetinterieur2">
             </div>
         </div>
 
@@ -63,28 +57,17 @@
 
         <div id="section2" class="row text-center">
             <div class="col-50 col-sm-100">
-                <img class="img-service" src="img/clock.svg" alt="création">
-
-                <?php
-                require_once __DIR__ . '/../config/Database.php';
-                require_once __DIR__ . '/../models/Date.php';
-
-                $date = new Date();
-                $stmt = $date->read();
-
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    // Créer dynamiquement une variable pour l'ID des ouvertures
-                    $id = "open" . $row['id'];
-                    echo "<div id='" . $id . "' class='bg-light ml-100 mr-100 p-10 b-radius-50'>";
-                    echo "<h3>" . $row['jour'] . "</h3>";
-                    echo "<h3>" . $row['horaire'] . "</h3>";
-                    echo "</div>";
-                }
-                ?>
+                <div class="bg-light ml-100 mr-100 p-10 b-radius-50">
+                <img class="img-service" src="../public/img/clock.svg" alt="création">
+                <?php foreach ($dates as $date): ?>
+                <li><?php echo htmlspecialchars($date['jour']) . ' - ' . htmlspecialchars($date['horaire']); ?></li>
+            <?php endforeach; ?>
+               
+                </div>
             </div>
             <div class="col-50 col-sm-100 mt-30">
                 <div class="bg-light ml-100 mr-100 p-10 b-radius-50">
-                    <img class="img-service" src="img/map.svg" alt="audit">
+                    <img class="img-service" src="../public/img/map.svg" alt="audit" width="24" height="24">
                     <h3>22 rue du Dortier</h3>
                     <h3> 86520 Saint-Rémy-sur-Creuse</h3>
                 </div>
@@ -98,34 +81,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-*/<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-<body>
-    <h1>Home Page</h1>
-    <h2>Latest Posts</h2>
-    <ul>
-        <?php foreach ($posts as $post): ?>
-            <li><a href="/blog/view?id=<?= $post['id'] ?>"><?= htmlspecialchars($post['title']) ?></a></li>
-            <li><?= htmlspecialchars($post['content']) ?></li>
-        <?php endforeach; ?>
-    </ul>
-</body>
-</html>/*
-
-
-<?php foreach ($dates as $date): ?>
-        <div class="bg-light ml-100 mr-100 p-10 b-radius-50">
-            <h3><?= htmlspecialchars($date['jour']) ?></h3>
-            <h3><?= htmlspecialchars($date['horaire']) ?></h3>
-        </div>
-    <?php endforeach; ?>

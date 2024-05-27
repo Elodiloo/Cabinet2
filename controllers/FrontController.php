@@ -1,6 +1,7 @@
 <?php
 
  require_once __DIR__ . '/../models/Post.php';
+ require_once __DIR__ . '/../models/Date.php';
 
 class FrontController {
 
@@ -22,8 +23,9 @@ class FrontController {
     }
         
     public function showDates() {
-        $dates = $this->dateModel->read();
-        render('dates', ['dates' => $dates]);
+        
+        $stmt = $this->dateModel->read();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 ?>

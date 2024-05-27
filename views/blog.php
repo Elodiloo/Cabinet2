@@ -32,7 +32,7 @@
                 // Créer dynamiquement le code HTML pour chaque article de blog
                 echo "<div id='{$id}' class='icon-container border-sh row'>";
                 echo "<div class='col-25'>";
-                //echo "<img src='../public/img/{$row['image']}' alt='{$row['title']}' class='image-radius border-sh'>";//
+                echo "<img src='../public/img/{$row['image']}' alt='{$row['title']}' class='image-radius border-sh'>";
                 echo "</div>";
                 echo "<div class='col-75'>";
                 echo "<h2 class='text-center'>{$row['title']}</h2>";

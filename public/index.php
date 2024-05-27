@@ -16,9 +16,11 @@ $frontController = new FrontController();
 
 switch ($route) {
     case '/':
-       $lastPosts = $frontController->getLastPosts();
-        render('home', ['posts' => $lastPosts]);
-        break;
+        $dates = $frontController->showDates();
+
+      
+        render('home', ['dates' => $dates]);
+            break;
     case '/booking':
             render('booking');
             break;  

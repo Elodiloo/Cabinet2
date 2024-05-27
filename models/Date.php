@@ -32,6 +32,7 @@ class Date
         $query = "SELECT id, jour, horaire FROM " . $this->table;
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
+       
         return $stmt;
     }
 
