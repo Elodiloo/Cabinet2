@@ -34,13 +34,13 @@
                 </div>
 
                 <input class="slide-input" id="slide1" type="radio" name="slides" checked>
-                <img class="slide-img" src="../public/img/image3.jpg" alt="cabinetexterieur">
+                <img class="slide-img" src="img/image3.jpg" alt="cabinetexterieur">
 
                 <input class="slide-input" id="slide2" type="radio" name="slides">
-                <img class="slide-img" src="../public/img/image2.jpg" alt="cabinetinterieur">
+                <img class="slide-img" src="img/image2.jpg" alt="cabinetinterieur">
 
                 <input class="slide-input" id="slide3" type="radio" name="slides">
-                <img class="slide-img" src="../puclic/img/image1.png" alt="cabinetinterieur2">
+                <img class="slide-img" src="img/image1.png" alt="cabinetinterieur2">
             </div>
         </div>
 
@@ -58,16 +58,20 @@
         <div id="section2" class="row text-center">
             <div class="col-50 col-sm-100">
                 <div class="bg-light ml-100 mr-100 p-10 b-radius-50">
-                <img class="img-service" src="../public/img/clock.svg" alt="création">
-                <?php foreach ($dates as $date): ?>
-                <li><?php echo htmlspecialchars($date['jour']) . ' - ' . htmlspecialchars($date['horaire']); ?></li>
-            <?php endforeach; ?>
+                <img class="img-service" src="img/clock.svg" alt="création">
+                <?php if (isset($dates) && !empty($dates)): ?>
+                    <?php foreach ($dates as $date): ?>
+                        <li><?php echo htmlspecialchars($date['jour']) . ' - ' . htmlspecialchars($date['horaire']); ?></li>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>Aucune date d'ouverture n'est disponible pour le moment.</p>
+                <?php endif; ?>
                
                 </div>
             </div>
             <div class="col-50 col-sm-100 mt-30">
                 <div class="bg-light ml-100 mr-100 p-10 b-radius-50">
-                    <img class="img-service" src="../public/img/map.svg" alt="audit" width="24" height="24">
+                    <img class="img-service" src="img/map.svg" alt="audit" width="24" height="24">
                     <h3>22 rue du Dortier</h3>
                     <h3> 86520 Saint-Rémy-sur-Creuse</h3>
                 </div>

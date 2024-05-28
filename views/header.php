@@ -19,11 +19,15 @@
             <div class="logo">White Smile</div>
             <div class="nav-links">
                 <ul>
-                    <li><a href="home.php">Accueil</a></li>
-                    <li><a href="booking.php">Prendre rendez-vous</a></li>
-                    <li><a href="services.php">Offre de soins</a></li>
-                    <li><a href="cabinet.php">Le cabinet</a></li>
-                    <li><a href="blog.php">Actualités santé</a></li>
+                    <li><a href="/">Accueil</a></li>
+                    <li><a href="/booking">Prendre rendez-vous</a></li>
+                    <li><a href="/services">Offre de soins</a></li>
+                    <li><a href="/cabinet">Le cabinet</a></li>
+                    <li><a href="/actualites">Actualités santé</a></li>
+                    <li><a href="/login" class="nav-link">
+                    <i class="fa fa-user"></i>
+                    Se connecter
+                    </a></li>
                 </ul>
             </div>
             <div class="burger">
