@@ -14,11 +14,17 @@
     <script src="https://kit.fontawesome.com/50a626f102.js" crossorigin="anonymous"></script>
 </head>
 
-
 <body>
-<?php require_once (__DIR__ .'/header.php') ;?>
+    <?php require_once (__DIR__ .'/header.php'); ?>
 
     <main>
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <p>Bienvenue, <?php echo htmlspecialchars($_SESSION['user_email']); ?>!</p>
+            <a href="/logout.php">Logout</a>
+        <?php else: ?>
+            <a href="/login.php">Login</a>
+            <a href="/register.php">Register</a>
+        <?php endif; ?>
 
         <h1 id="titre" class="text-center">Prendre rendez-vous</h1>
 
@@ -36,23 +42,10 @@
             <div id="available-slots"></div>
         </div>
 
-        
+        <button type="submit" class="submit-btn">J'enregistre mon rdv</button>
 
-                    <button type="submit" class="submit-btn">J'enregistre mon rdv </button>
-
-               
-
-            </div>
-          
-                </form>
-
-            </div>
-        </div>
-
-        <?php require_once (__DIR__ .'/footer.php') ; ?>
-
+        <?php require_once (__DIR__ .'/footer.php'); ?>
     </main>
     <script src="js/rdv.js"></script>
 </body>
-
 </html>
