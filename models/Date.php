@@ -12,7 +12,7 @@ class Date
         $database = new Database();
         $this->conn = $database->getConnection();
     }
-    // Créer un post de date
+   
     public function create()
     {
         $query = "INSERT INTO " . $this->table . " (jour, horaire) VALUES (:jour, :horaire, NOW())";
@@ -26,7 +26,7 @@ class Date
         }
         return false;
     }
-    // Lire tout
+    
     public function read()
     {
         $query = "SELECT id, jour, horaire FROM " . $this->table;
@@ -36,7 +36,6 @@ class Date
         return $stmt;
     }
 
-    // Lire un seul post
     public function readOne()
     {
         $query = "SELECT id, jour, horaire FROM " . $this->table . " WHERE id = ?";
@@ -48,7 +47,6 @@ class Date
         $this->horaire = $row['horaire'];
     }
 
-    // Mettre à jour 
     public function update()
     {
         $query = "UPDATE " . $this->table . " SET jour = :jour, horaire = :horaire WHERE id = :id";
@@ -65,7 +63,6 @@ class Date
         return false;
     }
 
-    // Supprimer un post
     public function delete()
     {
         $query = "DELETE FROM " . $this->table . " WHERE id = :id";

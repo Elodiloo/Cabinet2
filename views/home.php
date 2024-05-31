@@ -48,7 +48,7 @@
             <h2 class="text-center ml-50 mr-50">Le cabinet dentaire White Smile offre une large gamme de services et
                 soins pour répondre aux besoins de tous les patients.</h2>
 
-            <button type="submit" class="rdv-btn">PRENDRE RENDEZ-VOUS</button>
+            <button type="submit" class="rdv-btn" action="/booking">PRENDRE RENDEZ-VOUS</button>
 
             <h3 class="text-center">
                 L'équipe du Docteur Jean DUPONT vous accueille :

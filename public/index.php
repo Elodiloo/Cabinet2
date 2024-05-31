@@ -2,16 +2,15 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../controllers/FrontController.php';
 require_once __DIR__ . '/../controllers/UserController.php';
+require_once __DIR__ . '/../controllers/AdminController.php';
 
 session_start();
 
-// Parsing de l'URL pour extraire l'identifiant du post si nécessaire
 $uri = $_SERVER['REQUEST_URI'];
 $uriParts = explode('?', $uri);
 $route = $uriParts[0];
 $queryString = $uriParts[1] ?? '';
 
-// Fonction pour inclure un template avec des variables
 function render($template, $data = []) {
     extract($data);
     include __DIR__ . "/../views/$template.php";
@@ -19,6 +18,7 @@ function render($template, $data = []) {
 
 $frontController = new FrontController();
 $userController = new UserController();
+$adminController = new AdminController();
 
 switch ($route) {
     case '/':
@@ -66,6 +66,28 @@ switch ($route) {
 
     case '/logout':
         $userController->logout();
+        break;
+
+    case '/myprofile':
+        render('myprofile');
+        break;
+
+    case '/admin':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['update_schedule'])) {
+                $adminController->updateSchedule();
+            } elseif (isset($_POST['update_service']) || isset($_POST['delete_service']) || isset($_POST['add_service'])) {
+                $adminController->updateService();
+            } elseif (isset($_POST['update_post']) || isset($_POST['delete_post']) || isset($_POST['add_post'])) {
+                $adminController->managePost();
+            }
+        } else {
+            $adminController->showDashboard();
+        }
+        break;
+
+    case '/calendrier':
+        render('calendrier');
         break;
 
     default:

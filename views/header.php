@@ -1,7 +1,3 @@
-<?php
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,9 +7,8 @@ session_start();
     <link href="css/indexstyles.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&display=swap"
+          rel="stylesheet">
     <script src="https://kit.fontawesome.com/50a626f102.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -23,24 +18,21 @@ session_start();
         <div class="nav-links">
             <ul>
                 <li><a href="/">Accueil</a></li>
-                <li><a href="/booking">Prendre rendez-vous</a></li>
+                <?php if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] != 1): ?>
+                    <li><a href="/booking">Prendre rendez-vous</a></li>
+                <?php endif; ?>
                 <li><a href="/services">Offre de soins</a></li>
                 <li><a href="/cabinet">Le cabinet</a></li>
                 <li><a href="/actualites">Actualités santé</a></li>
-                <?php if (isset($_SESSION['user_id'])): ?>
-                    <li><a href="/profile" class="nav-link">
-                        <i class="fa fa-user"></i>
-                        <?php echo htmlspecialchars($_SESSION['user_email']); ?>
-                    </a></li>
-                    <li><a href="/logout" class="nav-link">
-                        <i class="fa fa-sign-out"></i>
-                        Se déconnecter
-                    </a></li>
+                <?php if (isset($_SESSION['user_role'])): ?>
+                    <?php if ($_SESSION['user_role'] == 1): ?>
+                        <li><a href="/admin">Mon tableau de bord</a></li>
+                        <li><i class="fas fa-user-shield"></i></li>
+                    <?php endif; ?>
+                   <li><a href="/logout">Se déconnecter</a></li>
                 <?php else: ?>
-                    <li><a href="/login" class="nav-link">
-                        <i class="fa fa-user"></i>
-                        Se connecter
-                    </a></li>
+                    <li><a href="/login">Se connecter</a></li>
+                    <li><a href="/register">S'inscrire</a></li>
                 <?php endif; ?>
             </ul>
         </div>

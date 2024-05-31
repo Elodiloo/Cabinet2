@@ -15,7 +15,7 @@ class Post
         $database = new Database();
         $this->conn = $database->getConnection();
     }
-    // Créer un post
+
     public function create()
     {
         $query = "INSERT INTO " . $this->table . " (user_id, title, content, image, updated_at) VALUES (:user_id, :title, :content, :image, NOW())";
@@ -33,7 +33,7 @@ class Post
         }
         return false;
     }
-    // Lire tous les posts
+
     public function read()
     {
         $query = "SELECT id, user_id, title, content, image, updated_at FROM " . $this->table . " ORDER BY updated_at DESC";
@@ -41,6 +41,7 @@ class Post
         $stmt->execute();
         return $stmt;
     }
+
     public function readLast()
     {
         $query = "SELECT id, user_id, title, content, image, updated_at FROM " . $this->table . " ORDER BY updated_at DESC LIMIT 3";
@@ -48,7 +49,7 @@ class Post
         $stmt->execute();
         return $stmt;
     }
-    // Lire un seul post
+
     public function readOne()
     {
         $query = "SELECT id, user_id, title, content, image, updated_at FROM " . $this->table . " WHERE id = ?";
@@ -62,10 +63,10 @@ class Post
         $this->image = $row['image'];
         $this->updated_at = $row['updated_at'];
     }
-    // Mettre à jour un post
+
     public function update()
     {
-        $query = "UPDATE " . $this->table . " SET user_id = :user_id, title = :title, content = :content WHERE id = :id";
+        $query = "UPDATE " . $this->table . " SET user_id = :user_id, title = :title, content = :content, image = :image WHERE id = :id";
         $stmt = $this->conn->prepare($query);
         $this->user_id = htmlspecialchars(strip_tags($this->user_id));
         $this->title = htmlspecialchars(strip_tags($this->title));
@@ -82,7 +83,7 @@ class Post
         }
         return false;
     }
-    // Supprimer un post
+
     public function delete()
     {
         $query = "DELETE FROM " . $this->table . " WHERE id = :id";
@@ -95,3 +96,4 @@ class Post
         return false;
     }
 }
+?>
