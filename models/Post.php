@@ -17,22 +17,23 @@ class Post
     }
 
     public function create()
-    {
-        $query = "INSERT INTO " . $this->table . " (user_id, title, content, image, updated_at) VALUES (:user_id, :title, :content, :image, NOW())";
-        $stmt = $this->conn->prepare($query);
-        $this->user_id = htmlspecialchars(strip_tags($this->user_id));
-        $this->title = htmlspecialchars(strip_tags($this->title));
-        $this->content = htmlspecialchars(strip_tags($this->content));
-        $this->image = htmlspecialchars(strip_tags($this->image));
-        $stmt->bindParam(':user_id', $this->user_id);
-        $stmt->bindParam(':title', $this->title);
-        $stmt->bindParam(':content', $this->content);
-        $stmt->bindParam(':image', $this->image);
-        if ($stmt->execute()) {
-            return true;
-        }
-        return false;
+{
+    $query = "INSERT INTO " . $this->table . " (user_id, title, content, image, updated_at) VALUES (:user_id, :title, :content, :image, NOW())";
+    $stmt = $this->conn->prepare($query);
+    $this->user_id = htmlspecialchars(strip_tags($this->user_id));
+    $this->title = htmlspecialchars(strip_tags($this->title));
+    $this->content = htmlspecialchars(strip_tags($this->content));
+    $this->image = htmlspecialchars(strip_tags($this->image));
+    $stmt->bindParam(':user_id', $this->user_id);
+    $stmt->bindParam(':title', $this->title);
+    $stmt->bindParam(':content', $this->content);
+    $stmt->bindParam(':image', $this->image);
+    if ($stmt->execute()) {
+        return true;
     }
+    return false;
+}
+
 
     public function read()
     {

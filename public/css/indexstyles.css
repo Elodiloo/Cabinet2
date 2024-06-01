@@ -75,6 +75,64 @@ p {
     margin-top: 100px;
 }
 
+.card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 80%;
+    max-width: 800px;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.card-content {
+    padding: 20px;
+    flex: 1;
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+.card p {
+    color: #666;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.card-btn:hover {
+    background-color: #0056b3;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
 .container {
     max-width: 1300px;
     margin: 0 auto;
@@ -381,6 +439,56 @@ h4 {
     grid-template-columns: 1fr 1fr;
     gap: 20px;
 }
+
+/* Style pour les créneaux horaires sélectionnés */
+.fc .fc-timegrid-event.selected {
+    background-color: blue !important;
+    /* Couleur des créneaux sélectionnés */
+    border-color: blue !important;
+}
+
+/* Réduire la taille du conteneur du calendrier */
+#calendar {
+    max-width: 600px;
+    /* Définissez la largeur maximale du calendrier */
+    margin: 0 auto;
+    /* Centrer le calendrier */
+    font-size: 0.8em;
+    /* Réduisez la taille de la police */
+}
+
+/* Réduire la hauteur des cellules de temps */
+.fc .fc-timegrid-slot {
+    height: 1.5em;
+    /* Ajustez cette valeur pour augmenter ou réduire la hauteur des cellules de temps */
+}
+
+/* Réduire la hauteur des événements */
+.fc .fc-timegrid-event {
+    height: 1.5em;
+    /* Ajustez cette valeur pour augmenter ou réduire la hauteur des événements */
+    font-size: 0.8em;
+    /* Réduisez la taille de la police des événements */
+    /* Style pour les créneaux horaires disponibles */
+    background-color: green !important;
+    /* Couleur des créneaux disponibles */
+}
+
+
+/* Ajuster la hauteur du header */
+.fc .fc-toolbar {
+    height: 2em;
+    /* Ajustez cette valeur pour augmenter ou réduire la hauteur du header */
+}
+
+/* Ajuster la hauteur des jours de la semaine */
+.fc .fc-col-header-cell {
+    height: 2em;
+    /* Ajustez cette valeur pour augmenter ou réduire la hauteur des jours de la semaine */
+}
+
+
+
 
 #forms {
     display: flex;

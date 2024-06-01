@@ -3,6 +3,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../controllers/FrontController.php';
 require_once __DIR__ . '/../controllers/UserController.php';
 require_once __DIR__ . '/../controllers/AdminController.php';
+require_once __DIR__ . '/../controllers/BookingController.php';
 
 session_start();
 
@@ -19,6 +20,7 @@ function render($template, $data = []) {
 $frontController = new FrontController();
 $userController = new UserController();
 $adminController = new AdminController();
+$bookingController = new BookingController();
 
 switch ($route) {
     case '/':
@@ -27,13 +29,14 @@ switch ($route) {
         break;
 
     case '/booking':
+        $bookingController->bookAppointment();
         render('booking');
-        break;  
-
+        break;
+    
     case '/services':
         $services = $frontController->showServices();    
         render('services', ['services' => $services]);
-        break;  
+        break;
 
     case '/cabinet':
         render('cabinet');
@@ -69,20 +72,42 @@ switch ($route) {
         break;
 
     case '/myprofile':
-        render('myprofile');
+        $userController->getUserProfile();
+        break;
+    
+    case '/admin':
+        render('admin');
         break;
 
-    case '/admin':
+    case '/admindate':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_schedule'])) {
+            $adminController->updateSchedule();
+        } else {
+            render('admindate');
+        }
+        break;
+
+    case '/adminservice':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST['update_schedule'])) {
-                $adminController->updateSchedule();
-            } elseif (isset($_POST['update_service']) || isset($_POST['delete_service']) || isset($_POST['add_service'])) {
+            if (isset($_POST['update_service'])) {
                 $adminController->updateService();
-            } elseif (isset($_POST['update_post']) || isset($_POST['delete_post']) || isset($_POST['add_post'])) {
+            } elseif (isset($_POST['delete_service'])) {
+                $adminController->deleteService();
+            } elseif (isset($_POST['add_service'])) {
+                $adminController->addService();
+            }
+        } else {
+            render('adminservice');
+        }
+        break;
+
+    case '/adminblog':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['update_post']) || isset($_POST['delete_post']) || isset($_POST['add_post'])) {
                 $adminController->managePost();
             }
         } else {
-            $adminController->showDashboard();
+            render('adminblog');
         }
         break;
 
@@ -93,5 +118,6 @@ switch ($route) {
     default:
         http_response_code(404);
         render('404');
+        break;
 }
 ?>
