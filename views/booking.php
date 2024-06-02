@@ -20,10 +20,12 @@
         <h1 id="titre" class="text-center">Prendre rendez-vous</h1>
 
         <h3 class="text-center">1 - Choisissez un motif de consultation :</h3>
-        <select id="motif">
-            <option value="1">Soins dentaires courants</option>
-            <option value="2">Consultation d'orthodontie</option>
-            <option value="3">Consultation d'implantologie</option>
+        <select id="motif" name="service_id">
+            <?php foreach ($services as $service): ?>
+                <option value="<?php echo htmlspecialchars($service['id']); ?>">
+                    <?php echo htmlspecialchars($service['title']); ?>
+                </option>
+            <?php endforeach; ?>
         </select>
 
         <h3 class="text-center">2 - Choisissez un rendez-vous :</h3>

@@ -28,10 +28,13 @@ switch ($route) {
         render('home', ['dates' => $dates]);
         break;
 
-    case '/booking':
-        $bookingController->bookAppointment();
-        render('booking');
-        break;
+        case '/booking':
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $bookingController->bookAppointment();
+            } else {
+                $bookingController->showBookingPage();
+            }
+            break;
     
     case '/services':
         $services = $frontController->showServices();    
@@ -111,8 +114,12 @@ switch ($route) {
         }
         break;
 
-    case '/calendrier':
-        render('calendrier');
+    case '/adminpatients':
+        $adminController->getAllPatients();
+        break;
+    
+    case '/admincalendrier':
+        $adminController->getAllBookings();
         break;
 
     default:
