@@ -115,11 +115,11 @@ switch ($route) {
         break;
 
     case '/adminpatients':
-        $adminController->getAllPatients();
+        $userController->getAllPatients();
         break;
     
     case '/admincalendrier':
-        $adminController->getAllBookings();
+        $bookingController->getAllBookings();
         break;
 
     default:
