@@ -21,7 +21,7 @@
             <?php foreach ($posts as $post): ?>
                 <div id="actu<?= $post['id']; ?>" class="icon-container border-sh row">
                     <div class="col-25">
-                        <img src="../public/img/<?= htmlspecialchars($post['image']); ?>" alt="<?= htmlspecialchars($post['title']); ?>" class="image-radius border-sh">
+                        <img src="uploads/<?= htmlspecialchars($post['image']); ?>" alt="<?= htmlspecialchars($post['title']); ?>" class="image-radius border-sh">
                     </div>
                     <div class="col-75">
                         <h2 class="text-center"><?= htmlspecialchars($post['title']); ?></h2>

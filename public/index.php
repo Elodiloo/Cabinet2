@@ -120,8 +120,15 @@ switch ($route) {
     
     case '/admincalendrier':
         $bookingController->getAllBookings();
+        $bookingController->manageBooking();
         break;
 
+    
+        case '/modifbooking':
+            $bookingController->updateBooking();
+            break;
+
+        
     default:
         http_response_code(404);
         render('404');

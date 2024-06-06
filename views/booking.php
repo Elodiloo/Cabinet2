@@ -30,7 +30,7 @@
 
         <h3 class="text-center">2 - Choisissez un rendez-vous :</h3>
         <div id="calendar"></div>
-        <form id="appointment-form" method="post" action="/booking">
+        <form id="appointment-form" method="post" action="/booking" class="center-form">
             <input type="hidden" name="booked_at" id="booked_at">
             <input type="hidden" name="service_id" id="service_id">
             <button type="submit" class="submit-btn">J'enregistre mon rdv</button>

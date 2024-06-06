@@ -75,11 +75,68 @@ p {
     margin-top: 100px;
 }
 
+/* Styles pour la modale */
+.modal {
+    display: none;
+    /* Masqué par défaut */
+    position: fixed;
+    /* Reste en place */
+    z-index: 1;
+    /* Au-dessus de tout autre contenu */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Pleine largeur */
+    height: 100%;
+    /* Pleine hauteur */
+    overflow: auto;
+    /* Si nécessaire, ajoute une barre de défilement */
+    background-color: rgb(0, 0, 0);
+    /* Couleur de fond */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Couleur de fond avec opacité */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% à partir du haut et centré */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    /* Peut être ajusté si nécessaire */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Bouton de fermeture (x) */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
 .card-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    width: 100%;
+}
+
+.card-buttons {
+    display: flex;
+    flex-direction: column;
+
 }
 
 .card {
@@ -87,16 +144,18 @@ p {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    width: 80%;
-    max-width: 800px;
+    width: 100%;
+    max-width: 1200px;
     transition: transform 0.2s;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    /* Changez la direction pour colonne */
+    justify-content: flex-start;
+    /* Alignez les éléments en haut */
 }
 
 .card-content {
-    padding: 20px;
+    padding: 10px;
     flex: 1;
 }
 
@@ -111,6 +170,10 @@ p {
 .card-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.center {
     align-items: center;
 }
 
@@ -222,11 +285,11 @@ p {
 }
 
 .ml-100 {
-    margin-left: 120px;
+    margin-left: -120px;
 }
 
 .mr-100 {
-    margin-right: 120px;
+    margin-right: -120px;
 }
 
 .mb-30 {
@@ -440,73 +503,56 @@ h4 {
     gap: 20px;
 }
 
-/* Style pour les créneaux horaires sélectionnés */
 .fc .fc-timegrid-event.selected {
     background-color: blue !important;
     /* Couleur des créneaux sélectionnés */
     border-color: blue !important;
 }
 
-/* Réduire la taille du conteneur du calendrier */
 #calendar {
     max-width: 600px;
-    /* Définissez la largeur maximale du calendrier */
     margin: 0 auto;
-    /* Centrer le calendrier */
     font-size: 0.8em;
-    /* Réduisez la taille de la police */
 }
 
-/* Réduire la hauteur des cellules de temps */
 .fc .fc-timegrid-slot {
-    height: 1.5em;
-    /* Ajustez cette valeur pour augmenter ou réduire la hauteur des cellules de temps */
+    height: 2.5em;
 }
 
-/* Réduire la hauteur des événements */
 .fc .fc-timegrid-event {
     height: 1.5em;
-    /* Ajustez cette valeur pour augmenter ou réduire la hauteur des événements */
     font-size: 0.8em;
-    /* Réduisez la taille de la police des événements */
-    /* Style pour les créneaux horaires disponibles */
     background-color: green !important;
-    /* Couleur des créneaux disponibles */
 }
 
-
-/* Ajuster la hauteur du header */
 .fc .fc-toolbar {
     height: 2em;
-    /* Ajustez cette valeur pour augmenter ou réduire la hauteur du header */
 }
 
-/* Ajuster la hauteur des jours de la semaine */
 .fc .fc-col-header-cell {
     height: 2em;
     /* Ajustez cette valeur pour augmenter ou réduire la hauteur des jours de la semaine */
 }
 
 
-
-
-#forms {
+.form-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
-.form-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    width: 100%;
-    max-width: 700px;
+.form-row {
+    display: flex;
 }
 
 .form-group {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+    background-color: rgb(213, 248, 236);
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(69, 85, 93, 0.1);
+    margin-bottom: 15px;
+    margin-right: 20px;
 }
 
 .form-group label {
@@ -523,7 +569,7 @@ h4 {
     width: 100%;
 }
 
-label {
+form-group textarea label {
     display: block;
     margin-bottom: 5px;
 }
@@ -555,6 +601,7 @@ input[type="date"] {
     box-sizing: border-box;
 }
 
+
 #birthdate {
     width: 100%;
 }
@@ -563,22 +610,55 @@ input[type="date"] {
     width: 40%;
 }
 
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
 .submit-btn,
 .add-btn,
 .delete-btn {
     grid-column: span 2;
-    padding: 10px;
-    background-color: rgb(235, 20, 124);
     color: white;
     border: none;
     border-radius: 4px;
     font-size: 18px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin: 20px;
+}
+
+.submit-btn {
+    background-color: rgb(235, 20, 124);
+    padding: 10px;
+}
+
+.delete-btn {
+    background-color: red;
+    padding: 10px;
+}
+
+.add-btn {
+    background-color: rgb(27, 80, 53);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 30px;
+    padding-left: 30px;
 }
 
 .submit-btn:hover {
     background-color: #0056b3;
+}
+
+.delete-btn:hover {
+    background-color: rgba(250, 242, 11, 0.918);
+    color: black;
+}
+
+.add-btn:hover {
+    background-color: #a914bd;
 }
 
 .submit-btn-container {
@@ -587,6 +667,7 @@ input[type="date"] {
     justify-content: center;
     margin-top: 20px;
 }
+
 
 .rdv-btn {
     width: 40%;
@@ -609,7 +690,11 @@ input[type="date"] {
     background-color: #0056b3;
 }
 
-
+.center-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
 
 img {
     max-width: 100%;
@@ -696,8 +781,23 @@ img {
     display: flex;
     padding: 20px;
     margin: 50px;
-    background-color: #f6bce1ef;
+    justify-content: space-between;
+    background-color: white;
     border-radius: 20px;
+}
+
+
+.icon-container .form-row {
+    display: flex;
+    flex-grow: 1;
+}
+
+.icon-container .form-group {
+    margin-right: 20px;
+}
+
+.icon-container .submit-btn {
+    margin-left: auto;
 }
 
 .icon-container2 {
@@ -705,8 +805,23 @@ img {
     padding: 20px;
     margin: 50px;
     background-color: rgb(104, 226, 245);
+    justify-content: space-between;
     border-radius: 20px;
 }
+
+.icon-container2 .form-row {
+    display: flex;
+    flex-grow: 1;
+}
+
+.icon-container2 .form-group {
+    margin-right: 20px;
+}
+
+.icon-container2 .add-btn {
+    margin-left: auto;
+}
+
 
 .icon-container3 {
     display: flex;

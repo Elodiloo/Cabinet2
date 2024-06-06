@@ -56,12 +56,13 @@
         </div>
 
         <div id="section2" class="row text-center">
-            <div class="col-50 col-sm-100">
+            <div class="col-50 col-sm-100 mt-30">
                 <div class="bg-light ml-100 mr-100 p-10 b-radius-50">
                 <img class="img-service" src="img/clock.svg" alt="création">
                 <?php if (isset($dates) && !empty($dates)): ?>
                     <?php foreach ($dates as $date): ?>
-                        <li><?php echo htmlspecialchars($date['jour']) . ' - ' . htmlspecialchars($date['horaire']); ?></li>
+                        <h3><?php echo htmlspecialchars($date['jour']); ?></h3>
+                        <h3><?php echo htmlspecialchars($date['horaire']); ?></h3>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <p>Aucune date d'ouverture n'est disponible pour le moment.</p>
