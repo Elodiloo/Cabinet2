@@ -41,5 +41,6 @@
         </div>
     </nav>
 </header>
+<script type="application/javascript" src="js/header.js"></script>
 </body>
 </html>

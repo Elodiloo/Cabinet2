@@ -22,23 +22,23 @@
     <h1 id="titre" class="text-center">Nos services et soins</h1>
 
 <div id="soin1" class="row">
-    <div class="col-25">
+    <div class="col-25 mt-50">
         <img src="img/detartage.png" alt="detartrage" class="image-carre">
     </div>
-    <div class="col-50">
+    <div class="col-50 mt-50">
         <?php foreach ($services as $service): ?>
             <h2><?php echo htmlspecialchars($service['title']); ?></h2>
             <h3><?php echo htmlspecialchars($service['description']); ?></h3>
         <?php endforeach; ?>
     </div>
-    <div class="col-25">
+    <div class="col-25 mb-30">
         <img src="img/kkdgj.png" alt="implant" class="image-carre">
     </div>
 </div>
 
 
 
-        <?php require_once (__DIR__ .'/footer.php') ; ?>>
+        <?php require_once (__DIR__ .'/footer.php') ; ?>
         </div>
 
     </main>

@@ -4,6 +4,7 @@ require_once __DIR__ . '/../controllers/FrontController.php';
 require_once __DIR__ . '/../controllers/UserController.php';
 require_once __DIR__ . '/../controllers/AdminController.php';
 require_once __DIR__ . '/../controllers/BookingController.php';
+require_once __DIR__ . '/../controllers/PatientController.php';
 
 session_start();
 
@@ -21,6 +22,8 @@ $frontController = new FrontController();
 $userController = new UserController();
 $adminController = new AdminController();
 $bookingController = new BookingController();
+$patientController = new PatientController();
+
 
 switch ($route) {
     case '/':
@@ -82,7 +85,7 @@ switch ($route) {
         render('admin');
         break;
 
-    case '/admindate':
+    case '/admin/date':
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_schedule'])) {
             $adminController->updateSchedule();
         } else {
@@ -90,7 +93,7 @@ switch ($route) {
         }
         break;
 
-    case '/adminservice':
+    case '/admin/service':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['update_service'])) {
                 $adminController->updateService();
@@ -104,7 +107,7 @@ switch ($route) {
         }
         break;
 
-    case '/adminblog':
+    case '/admin/blog':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['update_post']) || isset($_POST['delete_post']) || isset($_POST['add_post'])) {
                 $adminController->managePost();
@@ -114,17 +117,27 @@ switch ($route) {
         }
         break;
 
-    case '/adminpatients':
-        $userController->getAllPatients();
+    case '/admin/patients':
+         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['create_patient']) || isset($_POST['modify_patient']) || isset($_POST['delete_patient']) || isset($_POST['update_patient'])) {
+                    $patientController->managePatient();
+            }
+        } else {
+            $patientController->getAllPatients();
+        }
         break;
-    
-    case '/admincalendrier':
+
+    case '/admin/addpatient':
+        $userController->register();
+        break;
+
+    case '/admin/calendrier':
         $bookingController->getAllBookings();
         $bookingController->manageBooking();
         break;
 
     
-        case '/modifbooking':
+    case '/modifbooking':
             $bookingController->updateBooking();
             break;
 
