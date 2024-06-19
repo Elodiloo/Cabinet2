@@ -109,8 +109,12 @@ switch ($route) {
 
     case '/admin/blog':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST['update_post']) || isset($_POST['delete_post']) || isset($_POST['add_post'])) {
-                $adminController->managePost();
+            if (isset($_POST['update_post'])) {
+                $adminController->updatePost();
+            } elseif (isset($_POST['delete_post'])) {
+                $adminController->deletePost();
+            } elseif (isset($_POST['create_post'])) {
+                $adminController->createPost();
             }
         } else {
             render('adminblog');
@@ -128,7 +132,7 @@ switch ($route) {
         break;
 
     case '/admin/addpatient':
-        $userController->register();
+        $patientController->addPatient();
         break;
 
     case '/admin/calendrier':
