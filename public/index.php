@@ -121,20 +121,27 @@ switch ($route) {
         }
         break;
 
-    case '/admin/patients':
-         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST['create_patient']) || isset($_POST['modify_patient']) || isset($_POST['delete_patient']) || isset($_POST['update_patient'])) {
-                    $patientController->managePatient();
-            }
-        } else {
+        case '/admin/patients':
             $patientController->getAllPatients();
-        }
-        break;
-
-    case '/admin/addpatient':
-        $patientController->addPatient();
-        break;
-
+            break;
+        
+        case '/edit_patient':
+            if (isset($_GET['patient_id'])) {
+            $patientController->showEditPatientForm($_GET['patient_id']);
+            } else {
+            echo "Patient ID not provided.";
+            }
+            break;
+            
+        
+        case '/admin/addpatient':
+            $patientController->addPatient();
+            break;
+        
+        case '/admin/updatepatient':
+            $patientController->updatePatient();
+            break;
+        
     case '/admin/calendrier':
         $bookingController->getAllBookings();
         $bookingController->manageBooking();
