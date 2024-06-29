@@ -125,13 +125,14 @@ switch ($route) {
             $patientController->getAllPatients();
             break;
         
-        case '/edit_patient':
-            if (isset($_GET['patient_id'])) {
-            $patientController->showEditPatientForm($_GET['patient_id']);
-            } else {
-            echo "Patient ID not provided.";
-            }
-            break;
+            case '/edit_patient':
+                if (isset($_GET['patient_id'])) {
+                    $patientController->showEditPatientForm($_GET['patient_id']);
+                } else {
+                    echo "Patient ID not provided.";
+                }
+                break;
+            
             
         
         case '/admin/addpatient':
