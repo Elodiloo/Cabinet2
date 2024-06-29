@@ -125,7 +125,7 @@ switch ($route) {
             $patientController->getAllPatients();
             break;
         
-            case '/edit_patient':
+        case '/edit_patient':
                 if (isset($_GET['patient_id'])) {
                     $patientController->showEditPatientForm($_GET['patient_id']);
                 } else {
@@ -133,7 +133,9 @@ switch ($route) {
                 }
                 break;
             
-            
+        case '/admin/deletepatient':
+            $patientController->deletePatient();
+            break;    
         
         case '/admin/addpatient':
             $patientController->addPatient();
