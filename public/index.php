@@ -6,6 +6,8 @@ require_once __DIR__ . '/../controllers/AdminController.php';
 require_once __DIR__ . '/../controllers/BookingController.php';
 require_once __DIR__ . '/../controllers/PatientController.php';
 
+
+
 session_start();
 
 $uri = $_SERVER['REQUEST_URI'];
@@ -23,6 +25,8 @@ $userController = new UserController();
 $adminController = new AdminController();
 $bookingController = new BookingController();
 $patientController = new PatientController();
+
+
 
 
 switch ($route) {
@@ -48,10 +52,26 @@ switch ($route) {
         render('cabinet');
         break;
 
-    case '/actualites':
-        $posts = $frontController->getAllPosts();
-        render('blog', ['posts' => $posts]);
-        break;
+        case '/actualites':
+            $posts = $frontController->getAllPosts();
+            if (isset($_GET['id'])) {
+                $blog_id = $_GET['id'];
+                $comments = $frontController->showComments($blog_id);
+                $data = array_merge(['posts' => $posts], ['comments' => $comments], ['frontController' => $frontController]);
+                render('blog', $data);
+            } else {
+                $data = ['posts' => $posts, 'frontController' => $frontController];
+                render('blog', $data);
+            }
+            break;
+        
+        
+    
+        case '/comment':
+            $adminController->createComment();
+            
+            break;
+        
 
     case '/login':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -123,26 +143,17 @@ switch ($route) {
 
         case '/admin/patients':
             $patientController->getAllPatients();
+            $patientController->managePatients();
             break;
         
-        case '/edit_patient':
-                if (isset($_GET['patient_id'])) {
-                    $patientController->showEditPatientForm($_GET['patient_id']);
-                } else {
-                    echo "Patient ID not provided.";
-                }
-                break;
-            
-        case '/admin/deletepatient':
-            $patientController->deletePatient();
-            break;    
-        
+                   
+           
         case '/admin/addpatient':
             $patientController->addPatient();
             break;
         
-        case '/admin/updatepatient':
-            $patientController->updatePatient();
+        case '/editpatient':
+           $patientController->updatePatient();
             break;
         
     case '/admin/calendrier':

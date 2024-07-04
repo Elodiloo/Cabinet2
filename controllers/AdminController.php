@@ -194,5 +194,31 @@ class AdminController
         render('adminblog', ['posts' => $posts, 'error' => $error]);
     }
 
+    public function createComment()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (!isset($_POST['blog_id']) || empty($_POST['blog_id'])) {
+                $error = "Blog ID manquant.";
+                // Ajoutez ici une redirection ou un affichage d'erreur
+                return;
+            }
+    
+            $comment = new Comment();
+            $comment->blog_id = $_POST['blog_id'];
+            $comment->user_id = $_POST['user_id'];
+            $comment->content = $_POST['content'];
+            $comment->created_at = date('Y-m-d H:i:s');
+    
+            if ($comment->create()) {
+                header('Location: /actualites?id=' . $_POST['blog_id']);
+                exit;
+            } else {
+                $error = "Erreur lors de l'ajout du commentaire.";
+                // Ajoutez ici une redirection ou un affichage d'erreur
+            }
+        }
+    }
+    
+
 }
 ?>

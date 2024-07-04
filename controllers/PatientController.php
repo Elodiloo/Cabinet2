@@ -35,9 +35,10 @@ class PatientController {
         echo $this->render('adminpatients.php', ['patients' => $patients]);
     }
 
-    public function managePatients() {
+    public function managePatients() 
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $patientId = $_POST['patient_id'];
+            $patientId = $_POST['id'];
             if (isset($_POST['action'])) {
                 $action = $_POST['action'];
     
@@ -60,58 +61,50 @@ class PatientController {
             }
         }
     }
-  
+    
     
 
     public function showEditPatientForm($patientId)
 {
     $patient = $this->patientModel->getPatientById($patientId);
     if ($patient) {
-        echo $this->render('editpatient.php', ['patient' => $patient]);
+        $this->render('editpatient.php', ['patient' => $patient]);
     } else {
-        echo 'Patient not found';
+        echo "Patient not found";
     }
 }
 
 
+    public function deletePatient($patientId) 
+   {
+     $this->patientModel->deletePatient($patientId);
+       
+   }
 
-public function updatePatient()
-{
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $patient_id = htmlspecialchars(strip_tags(trim($_POST['patient_id'])));
-        $firstname = htmlspecialchars(strip_tags(trim($_POST['firstname'])));
-        $lastname = htmlspecialchars(strip_tags(trim($_POST['lastname'])));
-        $birthday = htmlspecialchars(strip_tags(trim($_POST['birthday'])));
-        $email = htmlspecialchars(strip_tags(trim($_POST['email'])));
 
-        $patient = $this->patientModel->getPatientById($patient_id);
-        if ($patient) {
-            $user_id = $patient['user_id'];
-            if ($this->userModel->updateUser($user_id, $firstname, $lastname, $birthday, $email)) {
-                header('Location: /admin/patients');
-                exit;
-            } else {
-                echo 'Erreur lors de la mise à jour du patient.';
-            }
-        } else {
-            echo 'Patient not found';
-        }
-    }
-}
+   public function updatePatient()
+   {
+       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+           $patientId = htmlspecialchars(strip_tags(trim($_POST['id'])));
+           $firstname = htmlspecialchars(strip_tags(trim($_POST['firstname'])));
+           $lastname = htmlspecialchars(strip_tags(trim($_POST['lastname'])));
+           $birthday = htmlspecialchars(strip_tags(trim($_POST['birthday'])));
+           $email = htmlspecialchars(strip_tags(trim($_POST['email'])));
+   
+           $userId = $this->patientModel->getUserIdByPatientId($patientId);
+           $this->userModel->updateUser($userId, $firstname, $lastname, $birthday, $email);
+   
+           $this->patientModel->updatePatient($patientId, $firstname, $lastname);
+   
+           header('Location: /admin/patients');
+           exit;
+       }
+   }
+   
+
+   
 
   
-      public function deletePatient($patientId) {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if ($this->patientModel->deletePatient($patientId)) {
-                header('Location: /admin/patients');
-                exit;
-            } else {
-                echo "Erreur lors de la suppression du patient.";
-            }
-        }
-    }
-
-    
     public function addPatient()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -119,7 +112,7 @@ public function updatePatient()
             $lastname = htmlspecialchars(strip_tags(trim($_POST['lastname'])));
             $birthday = htmlspecialchars(strip_tags(trim($_POST['birthday'])));
             $email = htmlspecialchars(strip_tags(trim($_POST['email'])));
-            $password = bin2hex(random_bytes(4)); // Génère un mot de passe aléatoire de 8 caractères
+            $password = bin2hex(random_bytes(4));
             $role = 0; 
 
             
@@ -128,9 +121,6 @@ public function updatePatient()
                 $user_id = $user['id'];
 
                 if ($this->patientModel->createPatient($user_id, $firstname, $lastname)) {
-                    // Vous pouvez envoyer un email avec le mot de passe temporaire ici
-                    // mail($email, "Votre compte a été créé", "Votre mot de passe temporaire est: $password");
-
                     header('Location: /admin/patients');
                     exit;
                 } else {
